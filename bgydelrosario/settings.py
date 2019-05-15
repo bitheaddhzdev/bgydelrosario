@@ -20,6 +20,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'pages.apps.PagesConfig',
+    'announcements.apps.AnnouncementsConfig',
+    'officials.apps.OfficialsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -64,8 +66,11 @@ WSGI_APPLICATION = 'bgydelrosario.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'bgydelrosario',
+        'USER':'postgres',
+        'PASSWORD': 'password',
+        'HOST':'localhost'
     }
 }
 

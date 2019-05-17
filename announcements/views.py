@@ -1,7 +1,13 @@
 from django.shortcuts import render
+from .models import Announcement
 
 def index(request):
-    return render(request, 'announcements/announcements.html')
+    announcements = Announcement.objects.all()
+
+    context = {
+        'announcements' : announcements,    
+    }
+    return render(request, 'announcements/announcements.html', context)
 
 def announcement(request):
     return render(request, 'announcements/announcement.html')

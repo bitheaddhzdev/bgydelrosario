@@ -41,16 +41,20 @@
                 commodi id libero eveniet harum perferendis laborum molestias quia.</p>
             </div>
             <div class="col-md-4">
-              <div class="card">
-                <img class="card-img-top" src="assets/img/realtors/kyle.jpg" alt="Seller of the month">
-                <div class="card-body">
-                  <h5 class="card-title">Seller Of The Month</h5>
-                  <h6 class="text-secondary">Kyle Brown</h6>
-                  <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nesciunt amet, illo itaque similique repellat.
-                    content.
-                  </p>
-                </div>
-              </div>
+              {% if mvp_officials %}
+                {% for official in mvp_officials %}
+                <div class="card">
+                    <img class="card-img-top" src="{{ official.photo.url }}" alt="Seller of the month">
+                    <div class="card-body">
+                      <h5 class="card-title">Seller Of The Month</h5>
+                      <h6 class="text-secondary">{{official.last_name}} {{official.first_name }}</h6>
+                      <p class="card-text">{{ official.description }}
+                      </p>
+                    </div>
+                  </div>    
+                {% endfor %}
+              {% endif %}
+              
             </div>
           </div>
         </div>
@@ -61,7 +65,7 @@
         <h2 class="display-4">We Work For You</h2>
         <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem velit aperiam, unde aliquid at similique!</h4>
         <hr>
-        <a href="{% urls 'announcements.html %}" class="btn btn-secondary text-white btn-lg">View Our Featured Listings</a>
+        <a href="{% url 'announcements' %}" class="btn btn-secondary text-white btn-lg">View Our Featured Listings</a>
       </section>
     
       <!-- Team -->
@@ -73,7 +77,7 @@
               {% for official in officials %}
                 <div class="col-md-4">
                     <img src="{{official.photo.url }}" alt="" class="rounded-circle mb-3">
-                    <h4>{{ official.first_name  official.last_name}}</h4>
+                    <h4>{{ official.first_name}} {{ official.last_name}}</h4>
                     <p class="text-success">
                       <i class="fas fa-award text-success mb-3"></i> {{ official.position }}</p>
                     <hr>

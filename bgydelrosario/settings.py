@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'announcements.apps.AnnouncementsConfig',
     'officials.apps.OfficialsConfig',
+    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

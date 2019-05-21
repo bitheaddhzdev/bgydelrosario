@@ -122,8 +122,18 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# File Permissions
-FILE_UPLOAD_PERMISSIONS=0o755
+# Messages
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
+
+FILE_UPLOAD_PERMISSIONS=0o644
 FILE_UPLOAD_DIRECTORY_PERMISSIONS=0o755
 FILE_UPLOAD_MAX_SIZE_MEMORY_SIZE=5621440
-

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+
+<div class="card">
+    <img src="{{user.photo_main.url}}"  class="card-img-top rounded-center" style="height:200px; width:200px;">
+    <div class="card-body">
+        <h5 class="card-title">User Profile</h5>
+        <h6 class="text-secondary">{{user}}</h6>
+    </div>
+    <br>
+    {{user.middle_name}}
+    <br>
+    {{user.birthplace}}
+    <br>
+    {{user.birthdate}}
+    <br>
+    {{user.address}}
+    <br>
+    {{user.gender}}
+    <br>
+    {{user.religion}}
+    <br>
+        
+    <br>
+    <img src="{{user.file_upload.url}}" class="img-fluid" style="height:100px; width:100px;">
+    <br>
+    {{user.bio}}
+</div>
+{% endblock %}

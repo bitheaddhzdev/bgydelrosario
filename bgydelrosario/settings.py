@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'officials.apps.OfficialsConfig',
     'contacts.apps.ContactsConfig',
     'accounts.apps.AccountsConfig',
+    'chartjs',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -134,7 +135,6 @@ try:
     from .local_settings import *
 except ImportError:
     pass
-
 
 FILE_UPLOAD_PERMISSIONS=0o644
 FILE_UPLOAD_DIRECTORY_PERMISSIONS=0o755

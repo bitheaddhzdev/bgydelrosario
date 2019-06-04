@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Contact
-# Create your views here.
+
 def contact(request):
     if request.method == 'POST':
         announcement_id = request.POST['announcement_id']

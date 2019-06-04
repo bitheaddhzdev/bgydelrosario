@@ -5,10 +5,18 @@ from datetime import datetime
 # Create your models here.
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    birthplace = models.CharField(max_length=200)
-    birthdate = models.DateField()
+    middle_name = models.CharField(max_length=100, blank=True)
+    birthplace = models.CharField(max_length=200, blank=True)
+    birthdate = models.DateField(default=datetime.now)
+    address = models.CharField(max_length=100, blank=True)
+    gender = models.CharField(max_length=100, blank=True)
+    religion = models.CharField(max_length=100, blank=True)
+    photo_main = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+    file_upload = models.FileField(upload_to='photos/%Y/%m/%d/', blank=True)
     date_created = models.DateTimeField(default=datetime.now)
+    bio = models.TextField(max_length=300, blank=True)
 
     def __str__(self):
-        return self.user.userprofile
+        return self.user.first_name + " " + self.user.last_name
+
 

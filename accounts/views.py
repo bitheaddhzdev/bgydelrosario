@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from contacts.models import Contact
 from .models import UserProfile
 
@@ -40,7 +41,6 @@ def register(request):
         return render(request, 'accounts/register.html')
 
 def login(request):
-
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -50,7 +50,10 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, 'You are now logged in')
-            return redirect('dashboard')
+            if 'next' in request.POST:
+                return redirect(request.POST.get('next'))
+            else:
+                return redirect('dashboard')
         else:
             messages.error(request, 'Invalid credentials')
             return redirect('login')
@@ -75,6 +78,7 @@ def dashboard(request):
     }
     return render(request, 'accounts/dashboard.html', context)
 
+@login_required(login_url='login')
 def profile(request):
     if request.method == 'POST':
         if request.user.is_authenticated:
@@ -107,10 +111,7 @@ def profile(request):
 def view_profile(request):
     user_id = request.user.id
     user_profile = get_object_or_404(UserProfile, user_id=user_id)
-    context = {
-        'user' : user_profile,
-    }
-    return render(request, 'accounts/view_profile.html', context)
+    return render(request, 'accounts/view_profile.html', {'user' : user_profile})
 
 def update_profile(request):
     user_id = request.user.id

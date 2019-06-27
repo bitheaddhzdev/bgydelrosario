@@ -17,7 +17,5 @@ class UserProfile(models.Model):
     bio = models.TextField(max_length=300, blank=True)
 
     def __str__(self):
-        return self.user.first_name + " " + self.user.last_name
-
-# add another Class here    
+        return self.user.first_name + " " + self.user.last_name   
 

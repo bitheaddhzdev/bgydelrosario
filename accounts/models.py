@@ -19,4 +19,5 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.first_name + " " + self.user.last_name
 
+# add another Class here    
 

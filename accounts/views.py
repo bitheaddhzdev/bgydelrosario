@@ -79,13 +79,16 @@ def dashboard(request):
     return render(request, 'accounts/dashboard.html', context)
 
 @login_required(login_url='login')
-def profile(request):
+def edit_profile(request):
+    user_id = request.user.id
+    user_profile = get_object_or_404(UserProfile, user_id=user_id)
     if request.method == 'POST':
         if request.user.is_authenticated:
-            user_id = request.user.id
             #get form values
             middle_name = request.POST['middle_name']
-            address = request.POST['address']
+            house_num = request.POST['house_num']
+            street = request.POST['street']
+            zone = request.POST['zone']
             gender = request.POST['gender']
             religion = request.POST['religion']
             photo_main = request.FILES['photo_main']
@@ -93,27 +96,25 @@ def profile(request):
             birthplace = request.POST['birthplace']
             bio = request.POST['bio']
         
-        save_profile = UserProfile(user_id=user_id,
-                                    middle_name=middle_name,
-                                    address=address,
-                                    gender=gender,
-                                    religion=religion,
-                                    photo_main=photo_main,
-                                    file_upload=file_upload,
-                                    bio=bio,
-                                    birthplace=birthplace)
-        save_profile.save()
+        save_profile = UserProfile.objects.all().update(
+                                middle_name=middle_name,
+                                house_num=house_num,
+                                street=street,
+                                zone=zone,
+                                gender=gender,
+                                religion=religion,
+                                photo_main=photo_main,
+                                file_upload=file_upload,
+                                bio=bio,
+                                birthplace=birthplace)
+        # save_profile.save()
         messages.success(request, 'Profile Saved!')
         return redirect('dashboard')
     else:
-        return render(request, 'accounts/profile.html') 
+        return render(request, 'accounts/edit_profile.html') 
 
 def view_profile(request):
     user_id = request.user.id
     user_profile = get_object_or_404(UserProfile, user_id=user_id)
     return render(request, 'accounts/view_profile.html', {'user' : user_profile})
 
-def update_profile(request):
-    user_id = request.user.id
-    user_profile = UserProfile.objects.all().filter(user_id=user_id).update()
-    

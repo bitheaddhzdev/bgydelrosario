@@ -1,30 +1,50 @@
 {% extends 'base.html' %}
 {% block content %}
 <br>
-
-<div class="card">
-    <img src="{{user.photo_main.url}}"  class="card-img-top rounded-center" style="height:200px; width:200px;">
-    <div class="card-body">
-        <h5 class="card-title">User Profile</h5>
-        <h6 class="text-secondary">{{user}}</h6>
-    </div>
-    <br>
-    {{user.middle_name}}
-    <br>
-    {{user.birthplace}}
-    <br>
-    {{user.birthdate}}
-    <br>
-    {{user.address}}
-    <br>
-    {{user.gender}}
-    <br>
-    {{user.religion}}
-    <br>
-        
-    <br>
-    <img src="{{user.file_upload.url}}" class="img-fluid" style="height:100px; width:100px;">
-    <br>
-    {{user.bio}}
+<br>
+<div class="container">
+   <div class="row">
+      <h2>Your Profile</h2>
+      <div class="col-md-7">
+          <div class="panel pane-default">
+              <div class="panel-heading"><h4>User Profile</h4></div>
+              <div class="panel-body">
+                  <div class="box box-info">
+                      <div class="box-body">
+                          <div class="col-sm-6">
+                              <div align="center">
+                                  <img src="{{user.photo_main.url}}" alt="User Pic" id="profile-image1"
+                                   class="img-circle img-responsive">
+                                   <input type="file" class="hidden" id="profile-image-upload">
+                                   <div style="color:#999;">click here to change profile image</div>
+                              </div>
+                              <br>
+                          </div>
+                          <!-- input group -->
+                          <div class="sm-col-6">
+                              <h4 style="color:#00b1b1;"><span>{{user.first_name}} {{user.middle_name}} 
+                                  {{ user.last_name}}
+                              </span></h4>
+                          </div>
+                          <div class="clearfix">
+                              <hr style="margin:5px 0 5px 0;">
+                          </div>
+                          <div class="col-sm-5 col-xs-6 title">birthplace: </div>
+                              <div class="col-sm-7 col-xs-6">{{user.birthplace}}
+                          </div>
+                          <div class="col-sm-5 col-xs-6 title">birthdate: </div>
+                          <div class="col-sm-7 col-xs-6">{{user.birthdate}}
+                          </div>
+                          <div class="col-sm-5 col-xs-6 title">House number: </div>
+                          <div class="col-sm-7 col-xs-6">{{user.house_num}}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+   </div>
 </div>
+
+
 {% endblock %}

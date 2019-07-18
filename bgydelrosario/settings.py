@@ -20,6 +20,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'pages.apps.PagesConfig',
+    'users.apps.UsersConfig',
+    'crispy_forms',
     'announcements.apps.AnnouncementsConfig',
     'officials.apps.OfficialsConfig',
     'contacts.apps.ContactsConfig',
@@ -136,6 +138,10 @@ try:
 except ImportError:
     pass
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_URL = 'login'
 FILE_UPLOAD_PERMISSIONS=0o644
 FILE_UPLOAD_DIRECTORY_PERMISSIONS=0o755
 FILE_UPLOAD_MAX_SIZE_MEMORY_SIZE=5621330

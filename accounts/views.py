@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from contacts.models import Contact
 from .models import UserProfile
 
+
 def register(request):
     if request.method == 'POST':
         #get form values
@@ -67,16 +68,17 @@ def logout(request):
         return redirect('index')
     return redirect('index')
 
+@login_required(login_url='login')
 def dashboard(request):
     # test if user is admin. 
-    # if request.user.is_superuser:
-    #     messages.success(request, 'Hello Admin')
-
-    user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
-    context = {
+    if request.user.is_superuser:
+        return render(request,'accounts/adminsite.html')
+    else:
+        user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
+        context = {
         'contacts' : user_contacts
-    }
-    return render(request, 'accounts/dashboard.html', context)
+        }
+        return render(request, 'accounts/dashboard.html', context)
 
 @login_required(login_url='login')
 def edit_profile(request):
@@ -108,13 +110,19 @@ def edit_profile(request):
                                 bio=bio,
                                 birthplace=birthplace)
         # save_profile.save()
-        messages.success(request, 'Profile Saved!')
+        messages.success(request, 'Profile Updated!')
         return redirect('dashboard')
     else:
-        return render(request, 'accounts/edit_profile.html') 
+        return render(request, 'accounts/edit_profile.html', {'user_profile': user_profile}) 
 
+@login_required(login_url='login')
 def view_profile(request):
-    user_id = request.user.id
-    user_profile = get_object_or_404(UserProfile, user_id=user_id)
-    return render(request, 'accounts/view_profile.html', {'user' : user_profile})
-
+    if request.user.is_authenticated:        
+        user_id = request.user.id
+        user_profile = get_object_or_404(UserProfile, user_id=user_id)
+        context = {
+            'user' : user_profile,
+        }
+        return render(request, 'accounts/view_profile.html', context)
+    else:
+        return redirect('dashboard')

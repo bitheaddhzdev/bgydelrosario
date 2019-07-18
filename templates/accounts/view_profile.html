@@ -1,50 +1,62 @@
 {% extends 'base.html' %}
+{% block title %} | Profile Account {% endblock %}
 {% block content %}
 <br>
 <br>
-<div class="container">
-   <div class="row">
-      <h2>Your Profile</h2>
-      <div class="col-md-7">
-          <div class="panel pane-default">
-              <div class="panel-heading"><h4>User Profile</h4></div>
-              <div class="panel-body">
-                  <div class="box box-info">
-                      <div class="box-body">
-                          <div class="col-sm-6">
-                              <div align="center">
-                                  <img src="{{user.photo_main.url}}" alt="User Pic" id="profile-image1"
-                                   class="img-circle img-responsive">
-                                   <input type="file" class="hidden" id="profile-image-upload">
-                                   <div style="color:#999;">click here to change profile image</div>
-                              </div>
-                              <br>
-                          </div>
-                          <!-- input group -->
-                          <div class="sm-col-6">
-                              <h4 style="color:#00b1b1;"><span>{{user.first_name}} {{user.middle_name}} 
-                                  {{ user.last_name}}
-                              </span></h4>
-                          </div>
-                          <div class="clearfix">
-                              <hr style="margin:5px 0 5px 0;">
-                          </div>
-                          <div class="col-sm-5 col-xs-6 title">birthplace: </div>
-                              <div class="col-sm-7 col-xs-6">{{user.birthplace}}
-                          </div>
-                          <div class="col-sm-5 col-xs-6 title">birthdate: </div>
-                          <div class="col-sm-7 col-xs-6">{{user.birthdate}}
-                          </div>
-                          <div class="col-sm-5 col-xs-6 title">House number: </div>
-                          <div class="col-sm-7 col-xs-6">{{user.house_num}}
-                          </div>
-                      </div>
-                  </div>
-              </div>
+<br>
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-1 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <br>
+                <a class="nav-link active" href="{% url 'dashboard' %}">Dashboard <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'edit_profile' %}">Edit Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Messages</a>
+              </li>
+            </ul>
           </div>
-      </div>
-   </div>
+        </nav>
+    </div>
 </div>
 
+<main role="main" class="col-md-11 ml-sm-auto col-lg-11 px-4">
+  <img class="rounded-circle article-img" src="{{user.photo_main.url}}">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">You Profile</h1>
 
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <div class="btn-group mr-2">
+        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+      </div>
+      <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+        <span data-feather="calendar"></span>
+        This week
+      </button>
+
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="card">
+        <div class="col-sm-6">
+          <label for="birthdate">Birthdate</label>
+        </div>
+        <div class="col-sm-6">
+            <label for="birthdate">{{user.birthdate}}</label>
+        </div>     
+    </div>
+
+        <h1>Wala lang</h1>
+        <h2>pota</h2>
+        <h3>Ayan na</h3>
+    </div>
+  </div>
 {% endblock %}

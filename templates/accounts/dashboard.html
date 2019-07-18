@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 {% block title %} | Dashboard {% endblock %}
 {% block content %}
-  
+<br>
 <section id="showcase-inner" class="py-5 text-white">
         <div class="container">
           <div class="row text-center">
@@ -37,6 +37,9 @@
           <div class="row">
             <div class="col-md-12">
               <h2>Welcome {{user.username}}</h2>
+              <a href="{% url 'edit_profile' %}">Edit Profile</a>
+              <a href="{% url 'view_profile' %}">View Profile</a>
+              
               {% if contacts %}
               <p>Here are the announcements that you have inquired about</p>
               <table class="table">

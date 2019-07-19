@@ -142,6 +142,14 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'youruser'
+# EMAIL_HOST_PASSWORD = 'yourpassword'
+
 FILE_UPLOAD_PERMISSIONS=0o644
 FILE_UPLOAD_DIRECTORY_PERMISSIONS=0o755
 FILE_UPLOAD_MAX_SIZE_MEMORY_SIZE=5621330

@@ -1,5 +1,6 @@
 
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block title %} | Dashboard {% endblock %}
 {% block content %}
 <br>
@@ -34,39 +35,24 @@
 
       <section id="dashboard" class="py-4">
         <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <h2>Welcome {{user.username}}</h2>
-              <a href="{% url 'edit_profile' %}">Edit Profile</a>
-              <a href="{% url 'view_profile' %}">View Profile</a>
-              
-              {% if contacts %}
-              <p>Here are the announcements that you have inquired about</p>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Announcement</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for contact in contacts %}
-                  <tr>
-                    <td>{{contact.id}}</td>
-                    <td>{{ contact.announcement }}</td>
-                    <td>
-                      <a class="btn btn-light" href="{% url 'announcement' contact.announcement_id %}">View Listing</a>
-                    </td>
-                  </tr>
-                  {% endfor %}
-
-                </tbody>
-              </table>
-              {% else %}
-                <p>You have not made any inquiries</p>
-              {% endif %}
-            </div>
+          <div class="card">
+            <img src="{{ user.profile.image.url }}" alt="" class="rounded-circle account-img" 
+                 style="height:120px; width:150px;">
+              <div class="media-body">
+                <h2 class="account-heading">{{user.username}}</h2>
+                <p class="text-secondary">{{user.email}}</p>
+              </div>
+              <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                 <fieldset class="form-group">
+                     <legend class="border-bottom mb-4">Profile Info</legend>
+                     {{ u_form | crispy }}
+                     {{ p_form | crispy }}
+                 </fieldset>
+                 <div class="form-group">
+                     <button class="btn btn-outline-info" type="submit">Update</button>
+                 </div>
+             </form> 
           </div>
         </div>
       </section>
